@@ -1,0 +1,13 @@
+asgiref==3.7.2
+Django==5.0.3
+django-cors-headers==4.3.1
+django-filter==23.5
+django-rest-passwordreset==1.4.0
+djangorestframework==3.14.0
+python-dateutil==2.8.2
+python-dotenv==1.0.1
+pytz==2024.1
+sqlparse==0.4.4
+stripe==8.10.0
+typing_extensions==4.11.0
+tzdata==2024.1

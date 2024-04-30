@@ -1,0 +1,12 @@
+project-backend/Include
+project-backend/Lib
+project-backend/Scripts
+project-backend/pyvenv.cfg
+project-backend/WMS/db.sqlite3
+project-backend/WMS/WMS_MAIN/migrations
+project-backend/WMS/WMS/__pycache__
+project-backend/WMS/WMS_MAIN/__pycache__
+project-backend/WMS/WMS_MAIN/static/menu_images
+project-backend/WMS/WMS/.env
+.env
+project-backend/WMS/WMS_MAIN/static/menu_images/*

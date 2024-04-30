@@ -1,0 +1,60 @@
+/* CSS ANIMATIONS */
+.navbar-component {
+  color: black;
+  font-weight: normal;
+  transition: color 500ms ease-in-out, font-weight 500ms ease-in-out;
+  animation: fade-up 3s;
+}
+
+.navbar-component:hover {
+  color: green;
+  font-weight: bold;
+}
+
+.button-navbar {
+  animation: fade-up 3s;
+}
+
+.roles-landing {
+  animation: fade-up 2s;
+}
+
+@keyframes fade-up {
+  0%, 50% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9)
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0px) scale(1)
+  }
+}
+
+.landing-description {
+  animation: fade-down 1s;
+}
+
+@keyframes fade-down {
+  0%, 50% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9)
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0px) scale(1)
+  }
+}
+
+.landing-form {
+  animation: fade-in-scroll linear;
+  animation-timeline: view();
+  animation-range-start: cover;
+  animation-range-end: 700px;
+}
+
+@keyframes fade-in-scroll {
+  from {scale: .8; opacity: 0; }
+  to { scale: 1; opacity:1; }
+}
