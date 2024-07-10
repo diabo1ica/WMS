@@ -1,1 +1,1 @@
-export const backendApi = 'https://wms-production-1856.up.railway.app/'
+export const backendApi = 'https://wms-production-1856.up.railway.app'
