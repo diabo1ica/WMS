@@ -1,1 +1,1 @@
-export const backendApi = 'http://localhost:8000'
+export const backendApi = 'https://wms-production-1856.up.railway.app/'
