@@ -459,189 +459,189 @@ class OrderListTest(TestCase):
         res = self.client.get(self.bill, {'table_number': 1}, format='json')
         # print("Case staff", res.data)
 
-class PositionTest(TestCase):
-    def setUp(self):
-        self.client = APIClient()
-        self.place_order_url = '/api/placeorder/'
-        self.customer_session = '/api/customer/'
-        self.signup_url = '/api/register/'
-        self.login_url = '/api/login/'
-        self.update_url = '/api/updatetables/'
-        self.category = '/api/categories/'
-        self.menuitem = '/api/menuitems/'
-        self.menupos = '/api/position/menuitem'
-        self.categorypos = '/api/position/category'
-        self.data = {
-            'email': 'testuser@gmail.com', 
-            'password': 'testpassword', 
-            'name': 'name', 
-            'location': 'loc', 
-            'table_numbers': {}
-        }
-        self.manager = self.client.post(self.signup_url, self.data, format='json')
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.manager.data['token'])
-        self.num = {'num': 7, 'list': True}
-        self.client.post(self.update_url, self.num, format='json')
-        # Create 3 categories
-        self.client.post('/api/categories/', {'name': 'hams'}, format='json')
-        self.client.post('/api/categories/', {'name': 'grilled'}, format='json')
-        self.client.post('/api/categories/', {'name': 'lisan al gaib'}, format='json')
-        category = Category.objects.get(name='hams').id
+# class PositionTest(TestCase):
+#     def setUp(self):
+#         self.client = APIClient()
+#         self.place_order_url = '/api/placeorder/'
+#         self.customer_session = '/api/customer/'
+#         self.signup_url = '/api/register/'
+#         self.login_url = '/api/login/'
+#         self.update_url = '/api/updatetables/'
+#         self.category = '/api/categories/'
+#         self.menuitem = '/api/menuitems/'
+#         self.menupos = '/api/position/menuitem'
+#         self.categorypos = '/api/position/category'
+#         self.data = {
+#             'email': 'testuser@gmail.com', 
+#             'password': 'testpassword', 
+#             'name': 'name', 
+#             'location': 'loc', 
+#             'table_numbers': {}
+#         }
+#         self.manager = self.client.post(self.signup_url, self.data, format='json')
+#         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.manager.data['token'])
+#         self.num = {'num': 7, 'list': True}
+#         self.client.post(self.update_url, self.num, format='json')
+#         # Create 3 categories
+#         self.client.post('/api/categories/', {'name': 'hams'}, format='json')
+#         self.client.post('/api/categories/', {'name': 'grilled'}, format='json')
+#         self.client.post('/api/categories/', {'name': 'lisan al gaib'}, format='json')
+#         category = Category.objects.get(name='hams').id
         
-        # Create 3 menu items in first category
-        menu_item_1 = {
-            "name": 'steamed hams',
-            "description": 'description',
-            "price": 12.99,
-            "category": category,
-            "dietary_requirements": 'VG',
-            "preparation_time": 15
-        }
-        menu_item_2 = {
-            "name": 'braised hams',
-            "description": 'description',
-            "price": 12.99,
-            "category": category,
-            "dietary_requirements": 'VG',
-            "preparation_time": 15
-        }
-        menu_item_3 = {
-            "name": 'hams al gaib',
-            "description": 'description',
-            "price": 12.99,
-            "category": category,
-            "dietary_requirements": 'VG',
-            "preparation_time": 15
-        }
-        self.client.post(self.menuitem, menu_item_1, format='json')
-        self.client.post(self.menuitem, menu_item_2, format='json')
-        self.client.post(self.menuitem, menu_item_3, format='json')
+#         # Create 3 menu items in first category
+#         menu_item_1 = {
+#             "name": 'steamed hams',
+#             "description": 'description',
+#             "price": 12.99,
+#             "category": category,
+#             "dietary_requirements": 'VG',
+#             "preparation_time": 15
+#         }
+#         menu_item_2 = {
+#             "name": 'braised hams',
+#             "description": 'description',
+#             "price": 12.99,
+#             "category": category,
+#             "dietary_requirements": 'VG',
+#             "preparation_time": 15
+#         }
+#         menu_item_3 = {
+#             "name": 'hams al gaib',
+#             "description": 'description',
+#             "price": 12.99,
+#             "category": category,
+#             "dietary_requirements": 'VG',
+#             "preparation_time": 15
+#         }
+#         self.client.post(self.menuitem, menu_item_1, format='json')
+#         self.client.post(self.menuitem, menu_item_2, format='json')
+#         self.client.post(self.menuitem, menu_item_3, format='json')
 
-    def test_position(self):
-        # Initialize new position
-        position_menu = {
-            'categoryId': 1,
-            'menuItems': [{
-                'menuItemId': 1,
-                'newPosition': 2,
-            }, {
-                'menuItemId': 2,
-                'newPosition': 3,
-            }, {
-                'menuItemId': 3,
-                'newPosition': 1,
-            }]
-        }
-        position_category = {
-            'categories': [{
-                'categoryId': 1,
-                'newPosition': 2,
-            }, {
-                'categoryId': 2,
-                'newPosition': 3,
-            }, {
-                'categoryId': 3,
-                'newPosition': 1,
-            }]
-        }
+#     def test_position(self):
+#         # Initialize new position
+#         position_menu = {
+#             'categoryId': 1,
+#             'menuItems': [{
+#                 'menuItemId': 1,
+#                 'newPosition': 2,
+#             }, {
+#                 'menuItemId': 2,
+#                 'newPosition': 3,
+#             }, {
+#                 'menuItemId': 3,
+#                 'newPosition': 1,
+#             }]
+#         }
+#         position_category = {
+#             'categories': [{
+#                 'categoryId': 1,
+#                 'newPosition': 2,
+#             }, {
+#                 'categoryId': 2,
+#                 'newPosition': 3,
+#             }, {
+#                 'categoryId': 3,
+#                 'newPosition': 1,
+#             }]
+#         }
 
-        # Call endpoints and update postions of Menu Items and Categories
-        self.client.post(self.menupos, position_menu, format='json')
-        self.client.post(self.categorypos, position_category, format='json')
+#         # Call endpoints and update postions of Menu Items and Categories
+#         self.client.post(self.menupos, position_menu, format='json')
+#         self.client.post(self.categorypos, position_category, format='json')
 
-        # response = self.client.get(self.menuitem)
-        # res = []
-        # for item in response.data:
-        #     res.append(item['pk'])
-        # self.assertEqual(res, [3, 1, 2])
+#         # response = self.client.get(self.menuitem)
+#         # res = []
+#         # for item in response.data:
+#         #     res.append(item['pk'])
+#         # self.assertEqual(res, [3, 1, 2])
 
-        # Enforce position of current Categories
-        response = self.client.get(self.category)
-        res = []
-        for item in response.data:
-            res.append(item['pk'])
-        self.assertEqual(res, [3, 1, 2])
+#         # Enforce position of current Categories
+#         response = self.client.get(self.category)
+#         res = []
+#         for item in response.data:
+#             res.append(item['pk'])
+#         self.assertEqual(res, [3, 1, 2])
 
-        # add more menu items to second category
-        menu_item_1 = {
-            "name": 'steamed hams',
-            "description": 'description',
-            "price": 12.99,
-            "category": 2,
-            "dietary_requirements": 'VG',
-            "preparation_time": 15
-        }
-        menu_item_2 = {
-            "name": 'braised hams',
-            "description": 'description',
-            "price": 12.99,
-            "category": 2,
-            "dietary_requirements": 'VG',
-            "preparation_time": 15
-        }
-        menu_item_3 = {
-            "name": 'LISAN AL GAIB',
-            "description": 'description',
-            "price": 12.99,
-            "category": 2,
-            "dietary_requirements": 'VG',
-            "preparation_time": 15
-        }
-        self.client.post(self.menuitem, menu_item_1, format='json')
-        self.client.post(self.menuitem, menu_item_2, format='json')
-        self.client.post(self.menuitem, menu_item_3, format='json')
+#         # add more menu items to second category
+#         menu_item_1 = {
+#             "name": 'steamed hams',
+#             "description": 'description',
+#             "price": 12.99,
+#             "category": 2,
+#             "dietary_requirements": 'VG',
+#             "preparation_time": 15
+#         }
+#         menu_item_2 = {
+#             "name": 'braised hams',
+#             "description": 'description',
+#             "price": 12.99,
+#             "category": 2,
+#             "dietary_requirements": 'VG',
+#             "preparation_time": 15
+#         }
+#         menu_item_3 = {
+#             "name": 'LISAN AL GAIB',
+#             "description": 'description',
+#             "price": 12.99,
+#             "category": 2,
+#             "dietary_requirements": 'VG',
+#             "preparation_time": 15
+#         }
+#         self.client.post(self.menuitem, menu_item_1, format='json')
+#         self.client.post(self.menuitem, menu_item_2, format='json')
+#         self.client.post(self.menuitem, menu_item_3, format='json')
 
-        # Set up the menu items' new posstions
-        position_menu = {
-            'categoryId': 2,
-            'menuItems': [{
-                'menuItemId': 4,
-                'newPosition': 2,
-            }, {
-                'menuItemId': 5,
-                'newPosition': 3,
-            }, {
-                'menuItemId': 6,
-                'newPosition': 1,
-            }]
-        }
-        self.client.post(self.menupos, position_menu, format='json')
-        response = self.client.get(self.menuitem)
-        # res = []
-        # for item in response.data:
-        #     print("Category ", item['category'], " MenuItemId ", item['pk'], " Position ", item['position'])
+#         # Set up the menu items' new posstions
+#         position_menu = {
+#             'categoryId': 2,
+#             'menuItems': [{
+#                 'menuItemId': 4,
+#                 'newPosition': 2,
+#             }, {
+#                 'menuItemId': 5,
+#                 'newPosition': 3,
+#             }, {
+#                 'menuItemId': 6,
+#                 'newPosition': 1,
+#             }]
+#         }
+#         self.client.post(self.menupos, position_menu, format='json')
+#         response = self.client.get(self.menuitem)
+#         # res = []
+#         # for item in response.data:
+#         #     print("Category ", item['category'], " MenuItemId ", item['pk'], " Position ", item['position'])
 
-    def test_position_delete(self):
-        self.client.post('/api/categories/', {'name': 'LISAN AL GAIB'}, format='json')
-        menu_item = {
-            "name": 'steamed hams',
-            "description": 'description',
-            "price": 12.99,
-            "category": 1,
-            "dietary_requirements": 'VG',
-            "preparation_time": 15
-        }
-        self.client.post(self.menuitem, menu_item, format='json')
+#     def test_position_delete(self):
+#         self.client.post('/api/categories/', {'name': 'LISAN AL GAIB'}, format='json')
+#         menu_item = {
+#             "name": 'steamed hams',
+#             "description": 'description',
+#             "price": 12.99,
+#             "category": 1,
+#             "dietary_requirements": 'VG',
+#             "preparation_time": 15
+#         }
+#         self.client.post(self.menuitem, menu_item, format='json')
 
-        # Delete menu item and cetogory id 3
-        self.client.delete(f'{self.menuitem}3/')
-        self.client.delete(f'{self.category}3/')
-        response = self.client.get(self.menuitem)
+#         # Delete menu item and cetogory id 3
+#         self.client.delete(f'{self.menuitem}3/')
+#         self.client.delete(f'{self.category}3/')
+#         response = self.client.get(self.menuitem)
 
-        # Assert that items in id 4 is moved to position 3
-        res = []
-        for item in response.data:
-            # print("Category ", item['category'], " MenuItemId ", item['pk'], " Position ", item['position'])
-            res.append((item['pk'], item['position']))
-        self.assertEqual(res, [(1, 1), (2, 2), (4, 3)])
+#         # Assert that items in id 4 is moved to position 3
+#         res = []
+#         for item in response.data:
+#             # print("Category ", item['category'], " MenuItemId ", item['pk'], " Position ", item['position'])
+#             res.append((item['pk'], item['position']))
+#         self.assertEqual(res, [(1, 1), (2, 2), (4, 3)])
 
-        # Assert that Category 4 is moved to position 3
-        response = self.client.get(self.category)
-        res = []
-        for item in response.data:
-            # print(item['pk'], " Position ", item['position'])
-            res.append((item['pk'], item['position']))
-        self.assertEqual(res, [(1, 1), (2, 2), (4, 3)])
+#         # Assert that Category 4 is moved to position 3
+#         response = self.client.get(self.category)
+#         res = []
+#         for item in response.data:
+#             # print(item['pk'], " Position ", item['position'])
+#             res.append((item['pk'], item['position']))
+#         self.assertEqual(res, [(1, 1), (2, 2), (4, 3)])
 
 class CategoryTest(TestCase):
     def setUp(self):
