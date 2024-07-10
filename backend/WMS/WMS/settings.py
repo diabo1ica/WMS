@@ -66,10 +66,12 @@ MIDDLEWARE = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-# FOR DEVELOPMENT SERVER TESTING ONLY
 CORS_ALLOWED_ORIGINS = [
+    # FOR DEVELOPMENT SERVER TESTING ONLY
     'http://localhost:5174',
-    'http://localhost:5173'
+    'http://localhost:5173',
+    # Vercel
+    'https://wms-pied.vercel.app',
 ]
 
 CORS_ALLOW_HEADERS = (
